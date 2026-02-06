@@ -10,7 +10,8 @@ import { createApiRoutes } from "./src/routes/apiRoutes.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4444;
+const PORT = process.env.PORT || 8080;
+const HOST = process.env.HOST || "0.0.0.0";
 const __filename = fileURLToPath(import.meta.url);
 const publicDir = path.join(dirname(__filename), "public");
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",");
@@ -20,7 +21,7 @@ app.use(
   cors({
     origin: allowedOrigins?.includes("*") ? "*" : allowedOrigins || [],
     methods: ["GET"],
-  })
+  }),
 );
 
 // Custom CORS middleware
@@ -60,6 +61,6 @@ app.get("*", (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.info(`Listening at ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.info(`Listening at ${HOST}:${PORT}`);
 });
