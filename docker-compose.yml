@@ -8,4 +8,4 @@ services:
     env_file:
       - .env
     ports:
-      - '4444:${PORT:-4444}'
+      - ${PORT}
